@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"math/big"
+	"os"
 )
 
 func randomPrime() *big.Int {
@@ -119,9 +121,10 @@ func main() {
 	print("------------------\n")
 	original := ""
 	fmt.Printf("Original: ")
-	_, err := fmt.Scanf("%s", &original)
+	in := bufio.NewReader(os.Stdin)
+	original, err := in.ReadString('\n')
 	if err != nil {
-		panic("Error in scanf")
+		panic("Error on ReadString()")
 	}
 	encoded := encodeString(original, pub)
 	fmt.Printf("Encoded: %s\n", encoded)
