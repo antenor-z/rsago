@@ -117,8 +117,14 @@ func main() {
 	pub, prv := deriveKeys(randomPrime(), randomPrime())
 
 	print("------------------\n")
-	encoded := encodeString("As of Go 1.8, ProbablyPrime(0) is allowed and applies only a Baillie-PSW test. Before Go 1.8, ProbablyPrime applied only the Miller-Rabin tests, and ProbablyPrime(0) panicked. ", pub)
+	original := ""
+	fmt.Printf("Original: ")
+	_, err := fmt.Scanf("%s", &original)
+	if err != nil {
+		panic("Error in scanf")
+	}
+	encoded := encodeString(original, pub)
+	fmt.Printf("Encoded: %s\n", encoded)
 	decoded := decodeString(encoded, prv)
-
-	print(decoded)
+	fmt.Printf("Decoded: %s\n", decoded)
 }
